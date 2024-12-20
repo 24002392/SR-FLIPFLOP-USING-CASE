@@ -103,7 +103,7 @@ endmodule
 
 **RTL LOGIC FOR FLIPFLOPS**
 
-![sr flip flop wave](https://github.com/user-attachments/assets/46ded91a-f87f-432e-90f4-1ffe462872bc)
+![sr flip flop](https://github.com/user-attachments/assets/e0cd6390-9ff1-4659-ae97-5d9458b7a583)
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
 
