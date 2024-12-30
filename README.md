@@ -51,55 +51,40 @@ Procedure
 5. For different input combinations generate the timing diagram.
 
 **PROGRAM**
-
 /* Program for flipflops and verify its truth table in quartus using Verilog programming. 
+module sr_flip_flop( q, q_bar, s,r, clk, reset);
 
-module sr_flip_flop (
+input s,r,clk, reset;
 
-    input wire S,      // Set input
-    
-    input wire R,      // Reset input
-    
-    input wire clk,    // Clock signal
-    
-    output reg Q,      // Output Q
-    
-    output reg Qn      // Complement of Q
+output reg q;
 
-);
+output q_bar;
 
-    always @(posedge clk) begin
+assign q_bar = ~q;
+
+always@(posedge clk) begin // for synchronous reset
+
+if(!reset)       q <= 0;
+
+else 
+begin q <= 1;
+
+case({s,r})
+
+  2'b00: q <= q;    // No change
   
-        if (S == 1 && R == 0) begin
-        
-            Q <= 1;       // Set
-            
-            Qn <= 0;
-       
-        end else if (S == 0 && R == 1) begin
-        
-            Q <= 0;       // Reset
-            
-            Qn <= 1;
-        
-        end else if (S == 0 && R == 0) begin
-        
-            Q <= Q;       // No change
-            
-            Qn <= Qn;
-        
-        end else if (S == 1 && R == 1) begin
-        
-            Q <= 1'bx;    // Invalid state
-           
-            Qn <= 1'bx;
-        
-        end
+    2'b01: q <= 1'b0; // Write logic for reset
     
-    end
+    2'b10: q <= 1'b1; // Write logic for set
+    
+    2'b11: q <= 1'bx; // Write logic for Invalid state
+ 
+  endcase
 
-endmodule
+end
+end //assign q_bar = ~q;
 
+Endmodule
 
 **RTL LOGIC FOR FLIPFLOPS**
 
